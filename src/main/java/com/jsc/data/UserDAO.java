@@ -82,6 +82,20 @@ public class UserDAO {
         return user;
     }
 
+
+    // Login method
+    public ResultSet searchByEmailPws (String email, String pasw){
+        String query = "SELECT * FROM users WHERE email = ? and password = ?";
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, pasw);
+            return preparedStatement.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+            return null;
+        }
+    }
+
     public void closeConnection() throws SQLException {
         if (connection != null) {
             connection.close();

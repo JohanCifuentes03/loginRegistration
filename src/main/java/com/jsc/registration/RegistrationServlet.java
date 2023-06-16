@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class RegistrationServlet extends HttpServlet {
 
     private void registerUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = null;
+        RequestDispatcher dispatcher;
         String userName     = request.getParameter("name");
         String userEmail    = request.getParameter("email");
         String userPassword = request.getParameter("pass");

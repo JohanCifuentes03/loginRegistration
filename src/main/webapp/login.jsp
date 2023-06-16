@@ -15,6 +15,9 @@
 </head>
 <body>
 
+
+<input type="hidden" id="status" value="<%= request.getAttribute("status")%>">
+
 	<div class="main">
 
 		<!-- Sing in  Form -->
@@ -31,7 +34,7 @@
 
 					<div class="signin-form">
 						<h2 class="form-title">Sign up</h2>
-						<form method="" action="" class="register-form"
+						<form method="post" action="LoginServlet" class="register-form"
 							id="login-form">
 							<div class="form-group">
 								<label for="username"><i
@@ -76,6 +79,21 @@
 	<!-- JS -->
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="js/main.js"></script>
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="alert/dist/sweetalert.css">
+
+	<script>
+		let status = document.getElementById("status").value;
+		if(status === "failed"){
+			swal({
+				title: "Oops!!",
+				text: "Wrong username or password, remember that your username is your email",
+				icon: "error",
+			});
+		}
+	</script>
+
 </body>
 <!-- these templates were made by Colorlib (https://colorlib.com) -->
 </html>
