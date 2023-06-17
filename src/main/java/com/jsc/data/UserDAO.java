@@ -84,18 +84,23 @@ public class UserDAO {
 
 
     // Login method
-    public ResultSet searchByEmailPws (String email, String pasw){
+    public User searchByEmailPws(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ? and password = ?";
-        try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
-            preparedStatement.setString(2, pasw);
-            return preparedStatement.executeQuery();
-        }catch (SQLException e){
-            e.printStackTrace(System.out);
-            return null;
-        }
-    }
+            preparedStatement.setString(2, password);
 
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return mapResultSetToUser(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null; // Retornar null en caso de no encontrar coincidencias
+    }
     public void closeConnection() throws SQLException {
         if (connection != null) {
             connection.close();

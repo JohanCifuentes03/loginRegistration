@@ -85,7 +85,7 @@
 
 	<script>
 		let status = document.getElementById("status").value;
-		if(status === "failed"){
+		if(status == "failed"){
 			swal({
 				title: "Oops!!",
 				text: "Wrong username or password, remember that your username is your email",
